@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Timeline } from "../../components/timeline/Timeline";
 import { useFundings } from "../../hooks/useFundings";
 import { useOrgs } from "../../hooks/useOrgs";
+import { Fundings } from "./components/Fundings";
 
 export const Organisation = () => {
   const { company_name } = useParams();
@@ -18,25 +18,22 @@ export const Organisation = () => {
     <div>
       <button onClick={() => navigate(-1)}>Go back</button>
       <h1>{company_name}</h1>
-      {data?.[0] &&
-        Object.entries(data[0])
-          .filter(([key, value]) => !!value && key !== "uuid")
-          .map(([key, value]) => (
-            <p key={key}>
-              {key.replaceAll("_", " ")}: {value}
-            </p>
-          ))}
-      {fundings && (
-        <div>
-          <h2>Funding rounds</h2>
-          <Timeline
-            items={fundings.map((funding) => ({
-              date: funding.announced_on,
-              description: `Amount raised: ${funding.raised_amount_usd}$\nSeries: ${funding.investment_type}`,
-            }))}
-          />
+
+      {data?.[0] && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 5fr" }}>
+          {Object.entries(data[0])
+            .filter(([key, value]) => !!value && key !== "uuid")
+            .map(([key, value]) => (
+              <React.Fragment key={key}>
+                <div style={{ textTransform: "capitalize", fontWeight: 700 }}>
+                  {key.replaceAll("_", " ")}
+                </div>
+                <div>{value}</div>
+              </React.Fragment>
+            ))}
         </div>
       )}
+      {fundings && fundings.length > 0 && <Fundings fundings={fundings} />}
     </div>
   );
 };

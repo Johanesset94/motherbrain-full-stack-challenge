@@ -1,17 +1,8 @@
-type funding = {
+export type Funding = {
   announced_on: string;
-  raised_amount_usd: string;
+  raised_amount_usd: string | null;
   investment_type: string;
-  // uuid: string;
-  // company_name: string;
-  // city?: string;
-  // country_code?: string;
-  // description?: string;
-  // employee_count: string;
-  // funding_rounds: string;
-  // funding_total_usd: string;
-  // homepage_url: string;
-  // short_description: string;
+  investor_names?: string;
 };
 
 export const getFundings = ({
@@ -31,6 +22,6 @@ export const getFundings = ({
   return fetch(url)
     .then((response) => response.json())
     .then(({ results: { hits } }) => {
-      return hits as Array<funding>;
+      return hits as Array<Funding>;
     });
 };

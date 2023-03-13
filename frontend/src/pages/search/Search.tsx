@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDebounce } from "usehooks-ts";
 import { useOrgs } from "../../hooks/useOrgs";
 import { useQueryParams } from "../../hooks/useQueryParams";
+import styles from "./Search.module.css";
 
 type QueryParams = {
   limit?: string;
@@ -33,6 +34,7 @@ export const Search = () => {
       {isLoading && <div>Loading...</div>}
       {data?.map((org) => (
         <div
+          className={styles["search-result"]}
           key={org.uuid}
           onClick={() => {
             navigate(`/organisation/${org.company_name}`);
