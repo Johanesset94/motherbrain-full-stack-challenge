@@ -51,16 +51,60 @@ async function handle(req, res) {
   }
 }
 
-async function searchOrgs(queryParams) {
+function getSearchBody(queryParams) {
+  if (!queryParams) {
+    return {
+      size: 10,
+      from: 0,
+    };
+  }
+
   const limit = queryParams.get("limit");
   const offset = queryParams.get("offset");
+  const body = {
+    size: limit != null ? limit : 10,
+    from: offset != null ? offset : 0,
+  };
+  for (const [key, value] of queryParams.entries()) {
+    if (key === "sort") {
+      const [field, direction] = value.split(":");
+      body.sort = [
+        {
+          [field]: {
+            order: direction,
+          },
+        },
+      ];
+    } else if (key.includes("exact")) {
+      const query = body.query || { match: {} };
+      const _key = key.replace("_exact", "");
+      query.match = {
+        ...query.match,
+        [_key]: { query: value, operator: "and" },
+      };
+      console.log("QUERY", query, "KEY", key);
+      body.query = query;
+    } else if (!["limit", "offset"].includes(key)) {
+      const query = body.query || { match: {} };
+      query.match = {
+        ...query.match,
+        [key]: value,
+      };
+      console.log("QUERY", query, "KEY", key);
+      body.query = query;
+    }
+  }
+
+  return body;
+}
+
+async function searchOrgs(queryParams) {
+  const body = getSearchBody(queryParams);
+  console.log("ORGS", body);
 
   const response = await client.search({
     index: "org",
-    body: {
-      size: limit != null ? limit : 10,
-      from: offset != null ? offset : 0,
-    },
+    body,
   });
 
   return {
@@ -70,15 +114,12 @@ async function searchOrgs(queryParams) {
 }
 
 async function searchFundings(queryParams) {
-  const limit = queryParams.get("limit");
-  const offset = queryParams.get("offset");
+  const body = getSearchBody(queryParams);
+  console.log("FUNDINGS", body);
 
   const response = await client.search({
     index: "funding",
-    body: {
-      size: limit != null ? limit : 10,
-      from: offset != null ? offset : 0,
-    },
+    body,
   });
 
   return {

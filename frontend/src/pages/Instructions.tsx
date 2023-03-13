@@ -1,9 +1,11 @@
-import React from "react";
-import OrgTable from "./OrgTable";
+import { useNavigate } from "react-router-dom";
+import { OrgTable } from "../components/OrgTable";
 
-export default function App() {
+export const Instructions = () => {
+  const navigate = useNavigate();
   return (
     <div className="App">
+      <button onClick={() => navigate("/search")}>Search page</button>
       <h1>Hello, dear future Motherbrain developer!</h1>
 
       <p>
@@ -67,4 +69,4 @@ export default function App() {
       <p style={{ color: "red" }}>Good Luck!</p>
     </div>
   );
-}
+};
