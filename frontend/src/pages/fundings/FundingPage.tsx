@@ -43,7 +43,7 @@ export const FundingPage = () => {
         <h1>Search fundings</h1>
         <label>Search company</label>
         <input
-          placeholder="Filter on company name"
+          placeholder="Company..."
           value={company_name}
           onChange={({ target: { value } }) =>
             setQueryParams({ company_name: value })
