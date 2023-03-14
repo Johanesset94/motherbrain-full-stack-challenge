@@ -1,5 +1,6 @@
 export type Funding = {
   announced_on: string;
+  company_name: string;
   raised_amount_usd: string | null;
   investment_type: string;
   investor_names?: string;
@@ -21,7 +22,17 @@ export const getFundings = ({
 
   return fetch(url)
     .then((response) => response.json())
-    .then(({ results: { hits } }) => {
-      return hits as Array<Funding>;
+    .then(({ results: { hits, total } }) => {
+      const _offset = parseInt(offset);
+      const _limit = parseInt(limit);
+      const _total = parseInt(total);
+      let nextCursor;
+      if (_offset + _limit < _total) {
+        nextCursor = _offset + _limit;
+      }
+      return {
+        data: hits as Array<Funding>,
+        nextCursor,
+      };
     });
 };

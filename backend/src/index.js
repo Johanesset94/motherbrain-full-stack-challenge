@@ -76,6 +76,7 @@ function getSearchBody(queryParams) {
         },
       ];
     } else if (key.includes("exact")) {
+      // Hack to get exact company. Cannot get uuid filtering to work
       const query = body.query || { match: {} };
       const _key = key.replace("_exact", "");
       query.match = {

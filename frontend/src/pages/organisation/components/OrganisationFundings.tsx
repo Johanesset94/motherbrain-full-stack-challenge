@@ -4,34 +4,19 @@ import { Timeline } from "../../../components/timeline/Timeline";
 
 import { Funding } from "../../../queries/fundings";
 import { MpyaColors } from "../../../util/colors";
-import styles from "./Fundings.module.css";
+import { getFundingTimelineItems } from "../../../util/funding";
+import styles from "./OrganisationFundings.module.css";
 
 export interface FundingsProps {
   fundings: Funding[];
 }
 
-const getInvestorString = (investors: string) =>
-  investors.replace(/[^a-zA-Z0-9\-, ]*/g, "").replace(",", ", ");
-
-export const Fundings: React.FC<FundingsProps> = ({ fundings }) => {
+export const OrganisationFundings: React.FC<FundingsProps> = ({ fundings }) => {
   return (
     <div>
       <h2>Funding rounds</h2>
       <div className={styles.grid}>
-        <Timeline
-          items={fundings.map((funding) => ({
-            date: funding.announced_on,
-            description: `USD raised: ${
-              funding.raised_amount_usd
-                ? parseInt(funding.raised_amount_usd).toLocaleString()
-                : "unknown"
-            }\nSeries: ${funding.investment_type}${
-              funding.investor_names &&
-              getInvestorString(funding.investor_names) &&
-              `\nInvestors: ${getInvestorString(funding.investor_names)}`
-            }`,
-          }))}
-        />
+        <Timeline items={getFundingTimelineItems(fundings)} />
         <div>
           <Pie
             options={{ responsive: true, resizeDelay: 100 }}

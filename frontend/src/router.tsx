@@ -4,6 +4,7 @@ import {
   Navigate,
   Route,
 } from "react-router-dom";
+import { Fundings } from "./pages/fundings/Fundings";
 import { Instructions } from "./pages/Instructions";
 import { Organisation } from "./pages/organisation";
 import { Search } from "./pages/search";
@@ -14,6 +15,7 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Instructions />} />
       <Route path="/search" element={<Search />} />
       <Route path="/organisation/:company_name" element={<Organisation />} />
+      <Route path="/fundings" element={<Fundings />} />
       <Route path="*" element={<Navigate to={"/"} />} />
     </>
   )

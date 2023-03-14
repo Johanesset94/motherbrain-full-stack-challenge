@@ -5,7 +5,8 @@ export const Instructions = () => {
   const navigate = useNavigate();
   return (
     <div className="App">
-      <button onClick={() => navigate("/search")}>Search page</button>
+      <button onClick={() => navigate("/search")}>Search organisations</button>
+      <button onClick={() => navigate("/fundings")}>Search fundings</button>
       <h1>Hello, dear future Motherbrain developer!</h1>
 
       <p>

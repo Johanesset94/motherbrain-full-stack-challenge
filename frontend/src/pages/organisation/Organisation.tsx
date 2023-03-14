@@ -2,26 +2,30 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFundings } from "../../hooks/useFundings";
 import { useOrgs } from "../../hooks/useOrgs";
-import { Fundings } from "./components/Fundings";
+import { OrganisationFundings } from "./components/OrganisationFundings";
 
 export const Organisation = () => {
   const { company_name } = useParams();
   const navigate = useNavigate();
-  const { data } = useOrgs({ company_name_exact: company_name, limit: 1 });
-  const { data: fundings } = useFundings({
+  const { data: orgs } = useOrgs({
+    company_name_exact: company_name,
+    limit: 1,
+  });
+  const { data } = useFundings({
     company_name_exact: company_name,
     sort: "announced_on:asc",
   });
-  console.log(data);
+  const fundings = data?.pages?.flatMap((page) => page.data);
+  console.log(orgs);
   console.log(fundings);
   return (
     <div>
       <button onClick={() => navigate(-1)}>Go back</button>
       <h1>{company_name}</h1>
 
-      {data?.[0] && (
+      {orgs?.[0] && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 5fr" }}>
-          {Object.entries(data[0])
+          {Object.entries(orgs[0])
             .filter(([key, value]) => !!value && key !== "uuid")
             .map(([key, value]) => (
               <React.Fragment key={key}>
@@ -33,7 +37,9 @@ export const Organisation = () => {
             ))}
         </div>
       )}
-      {fundings && fundings.length > 0 && <Fundings fundings={fundings} />}
+      {fundings && fundings.length > 0 && (
+        <OrganisationFundings fundings={fundings} />
+      )}
     </div>
   );
 };
