@@ -22,7 +22,7 @@ export const Timeline: React.FC<TimelineProps> = ({
     <div className={styles.timeline}>
       {items.map((item, index) => (
         <div
-          key={item.date + item.description}
+          key={item.date + index}
           className={styles["timeline-item"]}
           style={{ animationDelay: `calc(${index % 10} * 0.2s)` }}
           ref={index === items.length - 1 ? lastItemRef : null}

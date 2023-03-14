@@ -3,6 +3,7 @@ import { getFundings } from "../queries/fundings";
 
 interface Args {
   company_name?: string;
+  company_name_exact?: string;
   sort?: string;
 }
 

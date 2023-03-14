@@ -83,7 +83,6 @@ function getSearchBody(queryParams) {
         ...query.match,
         [_key]: { query: value, operator: "and" },
       };
-      console.log("QUERY", query, "KEY", key);
       body.query = query;
     } else if (!["limit", "offset"].includes(key)) {
       const query = body.query || { match: {} };
@@ -91,7 +90,6 @@ function getSearchBody(queryParams) {
         ...query.match,
         [key]: value,
       };
-      console.log("QUERY", query, "KEY", key);
       body.query = query;
     }
   }

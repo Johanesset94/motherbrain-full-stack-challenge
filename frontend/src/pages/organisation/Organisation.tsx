@@ -16,8 +16,6 @@ export const Organisation = () => {
     sort: "announced_on:asc",
   });
   const fundings = data?.pages?.flatMap((page) => page.data);
-  console.log(orgs);
-  console.log(fundings);
   return (
     <div>
       <button onClick={() => navigate(-1)}>Go back</button>
