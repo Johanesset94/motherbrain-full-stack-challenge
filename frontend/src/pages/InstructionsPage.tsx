@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { OrgTable } from "../components/OrgTable";
 
-export const Instructions = () => {
+export const InstructionsPage = () => {
   const navigate = useNavigate();
   return (
     <div className="App">

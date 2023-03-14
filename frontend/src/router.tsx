@@ -4,18 +4,21 @@ import {
   Navigate,
   Route,
 } from "react-router-dom";
-import { Fundings } from "./pages/fundings/Fundings";
-import { Instructions } from "./pages/Instructions";
-import { Organisation } from "./pages/organisation";
-import { Search } from "./pages/search";
+import { FundingPage } from "./pages/fundings";
+import { InstructionsPage } from "./pages/InstructionsPage";
+import { OrganisationPage } from "./pages/organisation";
+import { SearchPage } from "./pages/search";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Instructions />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/organisation/:company_name" element={<Organisation />} />
-      <Route path="/fundings" element={<Fundings />} />
+      <Route path="/" element={<InstructionsPage />} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route
+        path="/organisation/:company_name"
+        element={<OrganisationPage />}
+      />
+      <Route path="/fundings" element={<FundingPage />} />
       <Route path="*" element={<Navigate to={"/"} />} />
     </>
   )

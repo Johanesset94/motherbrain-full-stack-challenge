@@ -4,7 +4,7 @@ import { useFundings } from "../../hooks/useFundings";
 import { useOrgs } from "../../hooks/useOrgs";
 import { OrganisationFundings } from "./components/OrganisationFundings";
 
-export const Organisation = () => {
+export const OrganisationPage = () => {
   const { company_name } = useParams();
   const navigate = useNavigate();
   const { data: orgs } = useOrgs({
@@ -16,6 +16,7 @@ export const Organisation = () => {
     sort: "announced_on:asc",
   });
   const fundings = data?.pages?.flatMap((page) => page.data);
+
   return (
     <div>
       <button onClick={() => navigate(-1)}>Go back</button>

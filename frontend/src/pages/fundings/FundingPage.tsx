@@ -5,7 +5,7 @@ import { Timeline } from "../../components/timeline/Timeline";
 import { useFundings } from "../../hooks/useFundings";
 import { useIntersectionScroll } from "../../hooks/useIntersectionScroll";
 import { useQueryParams } from "../../hooks/useQueryParams";
-import { getFundingTimelineItems } from "../../util/funding";
+import { getFundingTimelineItems } from "../../util/funding-util";
 import styles from "./Fundings.module.css";
 
 type QueryParams = {
@@ -15,7 +15,7 @@ type QueryParams = {
   sort?: "asc" | "desc";
 };
 
-export const Fundings = () => {
+export const FundingPage = () => {
   const navigate = useNavigate();
   const { queryParams, setQueryParams } = useQueryParams();
   const { company_name = "", sort } = queryParams as QueryParams;

@@ -18,6 +18,7 @@ export const Timeline: React.FC<TimelineProps> = ({
   lastItemRef = null,
 }) => {
   const navigate = useNavigate();
+
   return (
     <div className={styles.timeline}>
       {items.map((item, index) => (
@@ -29,8 +30,11 @@ export const Timeline: React.FC<TimelineProps> = ({
         >
           <div className={styles["timeline-date"]}>{item.date}</div>
           {item.cta && (
-            <div onClick={() => navigate(`/organisation/${item.cta}`)}>
-              <a>{item.cta}</a>
+            <div
+              onClick={() => navigate(`/organisation/${item.cta}`)}
+              className={styles.link}
+            >
+              {item.cta}
             </div>
           )}
           <div>{item.description}</div>

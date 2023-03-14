@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOrgs } from "../queries/organsations";
+import { getOrgs } from "../queries/organsation-queries";
 
 export const useOrgs = (args = {}) => {
   const queryResult = useQuery({
@@ -10,5 +10,6 @@ export const useOrgs = (args = {}) => {
     queryFn: () => getOrgs(args),
     keepPreviousData: true,
   });
+
   return queryResult;
 };

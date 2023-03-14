@@ -99,7 +99,6 @@ function getSearchBody(queryParams) {
 
 async function searchOrgs(queryParams) {
   const body = getSearchBody(queryParams);
-  console.log("ORGS", body);
 
   const response = await client.search({
     index: "org",
@@ -114,7 +113,6 @@ async function searchOrgs(queryParams) {
 
 async function searchFundings(queryParams) {
   const body = getSearchBody(queryParams);
-  console.log("FUNDINGS", body);
 
   const response = await client.search({
     index: "funding",

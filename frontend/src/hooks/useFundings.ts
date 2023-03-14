@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getFundings } from "../queries/fundings";
+import { getFundings } from "../queries/funding-queries";
 
 interface Args {
   company_name?: string;
@@ -14,5 +14,6 @@ export const useFundings = (args: Args) => {
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     keepPreviousData: true,
   });
+
   return queryResult;
 };

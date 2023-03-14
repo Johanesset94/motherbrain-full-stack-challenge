@@ -11,10 +11,10 @@ type QueryParams = {
   query?: string;
 };
 
-export const Search = () => {
+export const SearchPage = () => {
   const navigate = useNavigate();
   const { queryParams, setQueryParams } = useQueryParams();
-  const { query = "", limit, offset } = queryParams as QueryParams;
+  const { query = "" } = queryParams as QueryParams;
 
   const debouncedSearchQuery = useDebounce(query, 300);
 
@@ -25,7 +25,7 @@ export const Search = () => {
   return (
     <div>
       <button onClick={() => navigate("/")}>Home</button>
-      <h1>Search organizations</h1>
+      <h1>Search organisations</h1>
       <input
         placeholder="Start type to search..."
         value={query}

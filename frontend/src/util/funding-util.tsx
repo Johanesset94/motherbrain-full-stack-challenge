@@ -1,4 +1,4 @@
-import { Funding } from "../queries/fundings";
+import { Funding } from "../queries/funding-queries";
 
 export const getInvestorString = (investors: string) =>
   investors.replace(/[^a-zA-Z0-9\-, ]*/g, "").replace(",", ", ");
